@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from './store/hooks'
-import { setBudget, addExpense, resetBudget } from './store/slices/budgetSlice'
+import { addExpense, resetBudget, setBudget } from "./store/slices/budgetSlice";
 
 function App() {
   const dispatch = useAppDispatch()

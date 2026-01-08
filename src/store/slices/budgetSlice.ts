@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface BudgetState {
   totalBudget: number;
@@ -11,7 +12,7 @@ const initialState: BudgetState = {
 };
 
 const budgetSlice = createSlice({
-  name: 'budget',
+  name: "budget",
   initialState,
   reducers: {
     setBudget: (state, action: PayloadAction<number>) => {
