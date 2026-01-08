@@ -77,7 +77,9 @@ export default function Dashboard() {
       {/* Header */}
       <div className="mb-8 relative">
         <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-3xl rotate-12 opacity-10"></div>
-        <p className="text-gray-500 text-sm md:text-base relative">Welcome back! 👋</p>
+        <p className="text-gray-500 text-sm md:text-base relative flex items-center gap-2">
+          Welcome back to BudgetEase 👋
+        </p>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 relative">
           Your Dashboard
           <span className="ml-3 text-4xl">📊</span>
@@ -95,18 +97,28 @@ export default function Dashboard() {
             <p className="text-blue-100 text-sm font-medium uppercase tracking-wide">
               Remaining Budget
             </p>
-            <p className={`text-5xl md:text-6xl font-bold mt-2 mb-4 ${remainingBudget < 0 ? "text-red-300" : ""}`}>
+            <p
+              className={`text-5xl md:text-6xl font-bold mt-2 mb-4 ${
+                remainingBudget < 0 ? "text-red-300" : ""
+              }`}
+            >
               €{remainingBudget.toFixed(2)}
             </p>
             <div className="mb-4">
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-blue-100">Budget Used</span>
-                <span className="font-bold">{budgetUsagePercent.toFixed(1)}%</span>
+                <span className="font-bold">
+                  {budgetUsagePercent.toFixed(1)}%
+                </span>
               </div>
               <div className="h-3 bg-white/20 rounded-full overflow-hidden">
                 <div
                   className={`h-full rounded-full transition-all duration-500 ${
-                    budgetUsagePercent > 100 ? "bg-red-400" : budgetUsagePercent > 80 ? "bg-yellow-400" : "bg-white"
+                    budgetUsagePercent > 100
+                      ? "bg-red-400"
+                      : budgetUsagePercent > 80
+                      ? "bg-yellow-400"
+                      : "bg-white"
                   }`}
                   style={{ width: `${Math.min(budgetUsagePercent, 100)}%` }}
                 ></div>
@@ -154,7 +166,11 @@ export default function Dashboard() {
               €{totalSaved.toFixed(2)}
             </p>
             <p className="text-purple-600 text-xs mt-2 font-medium">
-              {goals.length} goal{goals.length !== 1 ? "s" : ""} • {totalGoalTarget > 0 ? ((totalSaved / totalGoalTarget) * 100).toFixed(0) : 0}% complete
+              {goals.length} goal{goals.length !== 1 ? "s" : ""} •{" "}
+              {totalGoalTarget > 0
+                ? ((totalSaved / totalGoalTarget) * 100).toFixed(0)
+                : 0}
+              % complete
             </p>
           </div>
         </div>
@@ -171,7 +187,9 @@ export default function Dashboard() {
                 📈
               </div>
               <div>
-                <h2 className="text-xl font-bold text-gray-800">Spending by Category</h2>
+                <h2 className="text-xl font-bold text-gray-800">
+                  Spending by Category
+                </h2>
                 <p className="text-gray-500 text-sm">This month's breakdown</p>
               </div>
             </div>
@@ -184,7 +202,10 @@ export default function Dashboard() {
             ) : (
               <div className="space-y-4">
                 {categorySpending.map((cat, index) => {
-                  const percentage = thisMonthExpenses > 0 ? (cat.total / thisMonthExpenses) * 100 : 0;
+                  const percentage =
+                    thisMonthExpenses > 0
+                      ? (cat.total / thisMonthExpenses) * 100
+                      : 0;
                   return (
                     <div key={cat.value} className="group">
                       <div className="flex justify-between items-center mb-2">
@@ -195,11 +216,17 @@ export default function Dashboard() {
                           >
                             {cat.icon}
                           </div>
-                          <span className="font-semibold text-gray-700">{cat.label}</span>
+                          <span className="font-semibold text-gray-700">
+                            {cat.label}
+                          </span>
                         </div>
                         <div className="text-right">
-                          <p className="font-bold text-gray-800">€{cat.total.toFixed(2)}</p>
-                          <p className="text-xs text-gray-500">{percentage.toFixed(1)}%</p>
+                          <p className="font-bold text-gray-800">
+                            €{cat.total.toFixed(2)}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {percentage.toFixed(1)}%
+                          </p>
                         </div>
                       </div>
                       <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
@@ -221,9 +248,13 @@ export default function Dashboard() {
 
         {/* Recent Transactions */}
         <div className="bg-white rounded-3xl p-6 shadow-lg border-2 border-gray-100">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Recent Transactions</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-4">
+            Recent Transactions
+          </h2>
           {recentExpenses.length === 0 ? (
-            <p className="text-center text-gray-400 py-6">No transactions yet</p>
+            <p className="text-center text-gray-400 py-6">
+              No transactions yet
+            </p>
           ) : (
             <div className="space-y-4">
               {recentExpenses.map((expense) => {
