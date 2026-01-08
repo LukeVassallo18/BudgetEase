@@ -1,6 +1,4 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
+import { createSlice, nanoid, type PayloadAction } from "@reduxjs/toolkit";
 
 export type ExpenseCategory =
   | "food"
@@ -22,7 +20,12 @@ export interface CategoryInfo {
 export const EXPENSE_CATEGORIES: CategoryInfo[] = [
   { value: "food", label: "Food & Dining", icon: "🍔", color: "#FF6B6B" },
   { value: "transport", label: "Transport", icon: "🚌", color: "#4ECDC4" },
-  { value: "entertainment", label: "Entertainment", icon: "🎬", color: "#45B7D1" },
+  {
+    value: "entertainment",
+    label: "Entertainment",
+    icon: "🎬",
+    color: "#45B7D1",
+  },
   { value: "utilities", label: "Utilities", icon: "💡", color: "#96CEB4" },
   { value: "education", label: "Education", icon: "📚", color: "#FFEAA7" },
   { value: "health", label: "Health", icon: "💊", color: "#DDA0DD" },
@@ -64,9 +67,11 @@ const expenseSlice = createSlice({
   initialState,
   reducers: {
     addExpense: (state, action: PayloadAction<Omit<Expense, "id">>) => {
-      const newExpense = { ...action.payload, id: uuidv4() };
+      const newExpense: Expense = {
+        id: nanoid(),
+        ...action.payload,
+      };
       state.expenses.push(newExpense);
-      saveToLocalStorage(state.expenses);
     },
     updateExpense: (state, action: PayloadAction<Expense>) => {
       const index = state.expenses.findIndex((e) => e.id === action.payload.id);
@@ -82,5 +87,6 @@ const expenseSlice = createSlice({
   },
 });
 
-export const { addExpense, updateExpense, deleteExpense } = expenseSlice.actions;
+export const { addExpense, updateExpense, deleteExpense } =
+  expenseSlice.actions;
 export default expenseSlice.reducer;

@@ -1,6 +1,4 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
+import { createSlice, nanoid, type PayloadAction } from "@reduxjs/toolkit";
 
 export interface Income {
   id: string;
@@ -37,9 +35,11 @@ const incomeSlice = createSlice({
   initialState,
   reducers: {
     addIncome: (state, action: PayloadAction<Omit<Income, "id">>) => {
-      const newIncome = { ...action.payload, id: uuidv4() };
+      const newIncome: Income = {
+        id: nanoid(),
+        ...action.payload,
+      };
       state.incomes.push(newIncome);
-      saveToLocalStorage(state.incomes);
     },
     updateIncome: (state, action: PayloadAction<Income>) => {
       const index = state.incomes.findIndex((i) => i.id === action.payload.id);

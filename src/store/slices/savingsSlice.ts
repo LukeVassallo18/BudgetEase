@@ -1,6 +1,4 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
+import { createSlice, nanoid, type PayloadAction } from "@reduxjs/toolkit";
 
 export interface SavingsGoal {
   id: string;
@@ -38,9 +36,11 @@ const savingsSlice = createSlice({
   initialState,
   reducers: {
     addGoal: (state, action: PayloadAction<Omit<SavingsGoal, "id">>) => {
-      const newGoal = { ...action.payload, id: uuidv4() };
+      const newGoal: SavingsGoal = {
+        id: nanoid(),
+        ...action.payload,
+      };
       state.goals.push(newGoal);
-      saveToLocalStorage(state.goals);
     },
     updateGoal: (state, action: PayloadAction<SavingsGoal>) => {
       const index = state.goals.findIndex((g) => g.id === action.payload.id);
@@ -53,7 +53,10 @@ const savingsSlice = createSlice({
       state.goals = state.goals.filter((g) => g.id !== action.payload);
       saveToLocalStorage(state.goals);
     },
-    addToGoal: (state, action: PayloadAction<{ id: string; amount: number }>) => {
+    addToGoal: (
+      state,
+      action: PayloadAction<{ id: string; amount: number }>
+    ) => {
       const goal = state.goals.find((g) => g.id === action.payload.id);
       if (goal) {
         goal.currentAmount = Math.min(
@@ -63,10 +66,16 @@ const savingsSlice = createSlice({
         saveToLocalStorage(state.goals);
       }
     },
-    withdrawFromGoal: (state, action: PayloadAction<{ id: string; amount: number }>) => {
+    withdrawFromGoal: (
+      state,
+      action: PayloadAction<{ id: string; amount: number }>
+    ) => {
       const goal = state.goals.find((g) => g.id === action.payload.id);
       if (goal) {
-        goal.currentAmount = Math.max(goal.currentAmount - action.payload.amount, 0);
+        goal.currentAmount = Math.max(
+          goal.currentAmount - action.payload.amount,
+          0
+        );
         saveToLocalStorage(state.goals);
       }
     },
