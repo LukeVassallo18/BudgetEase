@@ -201,7 +201,7 @@ export default function Dashboard() {
               </div>
             ) : (
               <div className="space-y-4">
-                {categorySpending.map((cat, index) => {
+                {categorySpending.map((cat) => {
                   const percentage =
                     thisMonthExpenses > 0
                       ? (cat.total / thisMonthExpenses) * 100
