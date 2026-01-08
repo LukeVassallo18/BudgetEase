@@ -1,1 +1,58 @@
 @import "tailwindcss";
+
+/* Safe area for mobile devices */
+:root {
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Smooth transitions */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Bottom safe area padding */
+.pb-safe {
+  padding-bottom: max(1rem, var(--safe-area-inset-bottom));
+}
+
+/* Hide scrollbar but keep functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile-first base styles */
+html {
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+}
+
+body {
+  overscroll-behavior-y: contain;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
