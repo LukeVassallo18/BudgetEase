@@ -28,6 +28,12 @@ export default function Navigation() {
               <span className="text-xs font-medium">{item.label}</span>
             </NavLink>
           ))}
+          <NavLink
+            to="/"
+            className={({ isActive }: { isActive: boolean }) =>
+              isActive ? "text-emerald-600" : "text-gray-500"
+            }
+          />
         </div>
       </div>
     </nav>
